@@ -10,28 +10,24 @@ public class Paddle : CollideableMover {
 	
 	// Update is called once per frame
 	void Update () {
-        if (Mathf.Abs(transform.position.y)>0.01f)
+
+        if (Input.GetKey(KeyCode.A))
         {
-            translateTo(new Vector2(0, (-7 - transform.position.y)*0.1f));
-            if(Mathf.Abs(transform.position.y)<0.01f)
-            {
-                moveTo(new Vector2(transform.position.x, -7));
-            }
-        }
-        if (Input.GetKey(KeyCode.A) && transform.position.x > -6.5)
-        {
-            translateTo(new Vector2(-0.3f, 0));
+            velocity.x = -0.3f;
         }
 
-        if (Input.GetKey(KeyCode.D) && transform.position.x < 6.5)
+        if (Input.GetKey(KeyCode.D))
         {
-            translateTo(new Vector2(0.3f, 0));
+            velocity.x = 0.3f;
         }
+
+        translateTo(velocity);
+        velocity.x *= 0.6f;
+        
 	}
 
     public override int collide()
     {
-        translateTo(new Vector2(0, -0.2f));
         return 0;
     }
 }

@@ -3,31 +3,29 @@ using System.Collections;
 
 public class Block : Collideable {
 
-    float size = 1;
-    bool dead = false;
+    float scalar = 1;
+
+    public Vector2 size;
 
 	// Use this for initialization
 	void Start () {
-        rect = new Rect(transform.position.x - 1.5f, transform.position.y - 0.5f, 3, 1);
-	}
-	
-	// Update is called once per frame
-	void Update () {
-        if (dead)
-        {
-            size -= 0.1f;
-            transform.localScale *= size;
-
-        }
-        if (dead && size < 0)
-        {
-            GameObject.Destroy(gameObject);
-        }
+        rect = new Rect(transform.position.x - size.x/2, transform.position.y - size.y/2, size.x, size.y);
 	}
 
     public override int collide()
     {
-        dead = true;
+        StartCoroutine("die");
         return 1;
+    }
+
+    IEnumerator die()
+    {
+        while (scalar > 0)
+        {
+            scalar -= 0.1f;
+            resize(scalar);
+            yield return Time.deltaTime;
+        }
+        GameObject.Destroy(gameObject); 
     }
 }

@@ -7,59 +7,75 @@ public class Stage : MonoBehaviour {
     public GameObject prefab;
     public GameObject paddle;
 
-    private Ball ballScript;
+    private List<GameObject> staticColliders;
+    private List<GameObject> deadColliders;
 
-    private GameObject ball;
-
-    private List<GameObject> blocks;
-    private List<GameObject> deadBlocks;
+    private List<GameObject> dynamicColliders;
+    private List<GameObject> deadDynamicColliders;
 
 	// Use this for initialization
 	void Start () {
 
-        ball = GameObject.Instantiate(prefab, new Vector3(0, -3, 0), Quaternion.identity) as GameObject;
-        ballScript = ball.GetComponent<Ball>();
+        GameObject.Instantiate(prefab, new Vector3(0, -3, 0), Quaternion.identity);
 
-        blocks = new List<GameObject>(GameObject.FindGameObjectsWithTag("Block"));
-        deadBlocks = new List<GameObject>();
+        staticColliders = new List<GameObject>(GameObject.FindGameObjectsWithTag("StaticCollider"));
+        deadColliders = new List<GameObject>();
+
+        dynamicColliders = new List<GameObject>(GameObject.FindGameObjectsWithTag("DynamicCollider"));
+
 	}
 	
 	// Update is called once per frame
 	void Update () {
+        foreach(GameObject dynC in dynamicColliders){
 
-        Paddle pds = paddle.GetComponent<Paddle>();
-        
-        foreach (GameObject o in blocks)
-        {
-            Collideable bs = o.GetComponent<Collideable>();
+            CollideableMover dynCscript = dynC.GetComponent<CollideableMover>();
 
-            if (ballScript.bounce(bs.Rectangle, false))
+            foreach (GameObject statC in staticColliders)
             {
-                switch (bs.collide()) 
-                {
-                    case 1:
-                        deadBlocks.Add(o);
-                        break;
-                    case -1:
-                        ballScript.reset();
-                        break;
-                    default:
-                        break;
+                Collideable statCscript = statC.GetComponent<Collideable>();
+
+                if (dynCscript.Rectangle.Overlaps(statCscript.Rectangle)) {
+                    
+                    Vector2 bounceAmt = dynCscript.bounce(statCscript.Rectangle);
+                    dynCscript.translateTo(bounceAmt);
+
+                    dynCscript.collide();
+                    switch (statCscript.collide())
+                    {
+                        case 1:
+                            deadColliders.Add(statC);
+                            break;
+                        case -1:
+                            //dynCscript.reset();
+                            break;
+                        default:
+                            break;
+                    }
                 }
-                
+            }
+
+            foreach (GameObject dynC2 in dynamicColliders)
+            {
+                if (dynC != dynC2)
+                {
+                    CollideableMover dynC2script = dynC2.GetComponent<CollideableMover>();
+                    if (dynCscript.Rectangle.Overlaps(dynC2script.Rectangle))
+                    {
+                        dynCscript.bounce(dynC2script.Rectangle);
+
+                        dynC2script.collide();
+                        dynCscript.collide();
+                    }
+                }
             }
         }
 
-        foreach (GameObject db in deadBlocks)
+        foreach (GameObject db in deadColliders)
         {
-            blocks.Remove(db);
+            staticColliders.Remove(db);
         }
-        deadBlocks.Clear();
-
-        if (ballScript.bounce(pds.Rectangle, true))
-        {
-            pds.collide();
-        }
+        deadColliders.Clear();
 
 	}
 }

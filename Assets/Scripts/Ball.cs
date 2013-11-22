@@ -21,27 +21,48 @@ public class Ball : CollideableMover{
 
     public bool bounce(Rect blk, bool paddle)
     {
+        
         if (rect.Overlaps(blk))
         {
-            translateTo(new Vector2(-velocity.x * Time.deltaTime, -velocity.y * Time.deltaTime));
+            //Debug.DrawLine(new Vector3(rect.xMin, rect.yMin), new Vector3(rect.xMax, rect.yMin), Color.red, 1, false);
+            //Debug.DrawLine(new Vector3(rect.xMax, rect.yMin), new Vector3(rect.xMax, rect.yMax), Color.red, 1, false);
+            //Debug.DrawLine(new Vector3(rect.xMax, rect.yMax), new Vector3(rect.xMin, rect.yMax), Color.red, 1, false);
+            //Debug.DrawLine(new Vector3(rect.xMin, rect.yMax), new Vector3(rect.xMin, rect.yMin), Color.red, 1, false);
 
-            float vX = transform.position.x - blk.center.x;
-            float vY = transform.position.y - blk.center.y;
+            Vector2 mtd =   new Vector2();
+            float left =    rect.xMin - blk.xMax;
+            float right =   rect.xMax - blk.xMin;
+            float top =     rect.yMin - blk.yMax;
+            float bottom =  rect.yMax - blk.yMin;
 
-            if (Mathf.Abs(vX) > blk.width/2 + 0.5)
+            if (Mathf.Abs(left) < right)
+                mtd.x = -left;
+            else
+                mtd.x = -right;
+
+            if (Mathf.Abs(top) < bottom)
+                mtd.y = -top;
+            else
+                mtd.y = -bottom;
+
+            if (Mathf.Abs(mtd.x) < Mathf.Abs(mtd.y))
             {
-                velocity.x *= -1;
+                mtd.y = 0;
+                velocity.x = -velocity.x;
             }
-            if (Mathf.Abs(vY) > blk.height/2 + 0.5)
+            else
             {
-                velocity.y *= -1;
+                velocity.y = -velocity.y;
                 if (paddle)
                 {
-                    velocity.x += vX * 3;
+                    velocity.x += mtd.x * 5;
                     velocity.Normalize();
                     velocity.Scale(new Vector2(15, 15));
                 }
+                mtd.x = 0;
             }
+            translateTo(mtd);
+
             return true;
         }
         return false;

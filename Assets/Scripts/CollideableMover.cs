@@ -6,13 +6,13 @@ public abstract class CollideableMover : Collideable
 
     protected void moveTo(Vector2 pos)
     {
-        transform.position = new Vector3(pos.x, pos.y, 0);
+        transform.position = new Vector3(pos.x, pos.y);
         rect.center = new Vector2(transform.position.x, transform.position.y);
     }
 
     protected void translateTo(Vector2 pos)
     {
-        transform.position += new Vector3(pos.x, pos.y, 0);
+        transform.position += new Vector3(pos.x, pos.y);
         rect.center = new Vector2(transform.position.x, transform.position.y);
     }
 

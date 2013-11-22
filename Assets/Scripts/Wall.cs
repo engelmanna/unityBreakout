@@ -13,7 +13,7 @@ public class Wall : Collideable {
     void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.blue;
-        Gizmos.DrawWireCube(new Vector3(wallRect.center.x, wallRect.center.y), new Vector3(wallRect.width, wallRect.height, 1));
+        Gizmos.DrawWireCube(new Vector3(wallRect.center.x, wallRect.center.y), new Vector3(wallRect.width, wallRect.height, 0));
     }
     
 

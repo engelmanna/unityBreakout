@@ -56,7 +56,10 @@ public class Stage : MonoBehaviour {
         }
         deadBlocks.Clear();
 
-        ballScript.bounce(pds.Rectangle, true);
+        if (ballScript.bounce(pds.Rectangle, true))
+        {
+            pds.collide();
+        }
 
 	}
 }

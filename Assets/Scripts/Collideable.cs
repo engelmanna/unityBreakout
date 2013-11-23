@@ -33,5 +33,5 @@ public abstract class Collideable : MonoBehaviour {
         rect = Rect.MinMaxRect(xMin, yMin, xMax, yMax);
     }
 
-    public abstract int collide();
+    public abstract int collide(Vector2 bounceAmt);
 }

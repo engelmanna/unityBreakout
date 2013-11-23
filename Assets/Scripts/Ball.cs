@@ -5,6 +5,7 @@ using System.Collections.Generic;
 public class Ball : CollideableMover{
 
     public float size;
+    public GameObject particle;
 
     // Use this for initialization
     void Start()
@@ -26,8 +27,9 @@ public class Ball : CollideableMover{
         moveTo(new Vector2(0,-5));
     }
 
-    public override int collide()
+    public override int collide(Vector2 bounceVec)
     {
+        translateTo(bounceVec);
         return 0;
     }
 }

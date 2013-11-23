@@ -17,7 +17,7 @@ public class Wall : Collideable {
     }
     
 
-    public override int collide()
+    public override int collide(Vector2 bounceAmt)
     {
         return 0;
     }

@@ -26,8 +26,10 @@ public class Paddle : CollideableMover {
         
 	}
 
-    public override int collide()
+    public override int collide(Vector2 bounceAmt)
     {
+        bounceAmt.y = 0;
+        translateTo(bounceAmt);
         return 0;
     }
 }

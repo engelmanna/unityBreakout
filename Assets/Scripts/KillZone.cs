@@ -16,7 +16,7 @@ public class KillZone : Collideable {
         Gizmos.DrawWireCube(new Vector3(wallRect.center.x, wallRect.center.y), new Vector3(wallRect.width, wallRect.height, 1));
     }
 
-    public override int collide()
+    public override int collide(Vector2 bounceAmt)
     {
         return -1;
     }

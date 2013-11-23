@@ -38,10 +38,10 @@ public class Stage : MonoBehaviour {
                 if (dynCscript.Rectangle.Overlaps(statCscript.Rectangle)) {
                     
                     Vector2 bounceAmt = dynCscript.bounce(statCscript.Rectangle);
-                    dynCscript.translateTo(bounceAmt);
+                    //dynCscript.translateTo(bounceAmt);
 
-                    dynCscript.collide();
-                    switch (statCscript.collide())
+                    dynCscript.collide(bounceAmt);
+                    switch (statCscript.collide(bounceAmt))
                     {
                         case 1:
                             deadColliders.Add(statC);
@@ -62,10 +62,9 @@ public class Stage : MonoBehaviour {
                     CollideableMover dynC2script = dynC2.GetComponent<CollideableMover>();
                     if (dynCscript.Rectangle.Overlaps(dynC2script.Rectangle))
                     {
-                        dynCscript.bounce(dynC2script.Rectangle);
+                        Vector2 bounceAmt = dynCscript.bounce(dynC2script.Rectangle);
 
-                        dynC2script.collide();
-                        dynCscript.collide();
+                        dynCscript.collide(bounceAmt);
                     }
                 }
             }

@@ -12,7 +12,7 @@ public class Block : Collideable {
         rect = new Rect(transform.position.x - size.x/2, transform.position.y - size.y/2, size.x, size.y);
 	}
 
-    public override int collide()
+    public override int collide(Vector2 bounceAmt)
     {
         StartCoroutine("die");
         return 1;

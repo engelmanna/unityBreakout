@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 22cd869e4e2375e4596799b4bbbf0d93
+guid: 79aed1c3d50032c468730cb4bfbd46c7
 ModelImporter:
   serializedVersion: 15
   fileIDToRecycleName:
@@ -7,19 +7,17 @@ ModelImporter:
     400000: //RootNode
     2300000: //RootNode
     3300000: //RootNode
-    4300000: pPlane1
-    4300002: cube_3x1
+    4300000: testGate
     9500000: //RootNode
-    11100000: //RootNode
   materials:
     importMaterials: 0
     materialName: 0
     materialSearch: 1
   animations:
-    legacyGenerateAnimations: 0
+    legacyGenerateAnimations: 4
     bakeSimulation: 0
     optimizeGameObjects: 0
-    animationCompression: 3
+    animationCompression: 1
     animationRotationError: .5
     animationPositionError: .5
     animationScaleError: .5

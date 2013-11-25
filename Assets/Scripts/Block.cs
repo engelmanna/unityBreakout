@@ -14,6 +14,7 @@ public class Block : Collideable {
 
     public override int collide(Vector2 bounceAmt)
     {
+        gameObject.renderer.material.SetColor("_Emission", Color.white);
         StartCoroutine("die");
         return 1;
     }

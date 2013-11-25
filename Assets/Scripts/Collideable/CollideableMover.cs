@@ -1,19 +1,27 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public abstract class CollideableMover : Collideable
+public class CollideableMover : Collideable
 {
-    protected Vector2 velocity;
+    public Vector2 velocity;
+    public bool lockX;
+    public bool lockY;
+
+    void Update()
+    {
+        transform.position += new Vector3(velocity.x * Time.deltaTime, velocity.y * Time.deltaTime);
+        rect.center = new Vector2(transform.position.x, transform.position.y);
+    }
 
     public void moveTo(Vector2 pos)
     {
         transform.position = new Vector3(pos.x, pos.y);
-        rect.center = new Vector2(transform.position.x, transform.position.y);
+        rect.center = new Vector2(pos.x,pos.y);
     }
 
-    public void translateTo(Vector2 pos)
+    public void translate(Vector2 pos)
     {
-        transform.position += new Vector3(pos.x, pos.y);
+        transform.position += new Vector3(pos.x,pos.y);
         rect.center = new Vector2(transform.position.x, transform.position.y);
     }
 
@@ -52,6 +60,16 @@ public abstract class CollideableMover : Collideable
             mtd.x = 0;
         }
 
+        if (lockX)
+        {
+            mtd.x = 0;
+        }
+        if (lockY)
+        {
+            mtd.y = 0;
+        }
+
+        translate(mtd);
         return mtd;
     }
 }

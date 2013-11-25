@@ -1,19 +1,19 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public abstract class Collideable : MonoBehaviour {
+public class Collideable: MonoBehaviour {
 
     protected Rect rect;
+    public Vector2 size;
+
+    void Start()
+    {
+        rect = new Rect(transform.position.x - size.x / 2, transform.position.y - size.y / 2, size.x, size.y);
+    }
 
     public Rect Rectangle {
         get{ return rect; }
         set{ rect = value; }
-    }
-
-    void OnDrawGizmosSelected()
-    {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireCube(transform.position, new Vector3(rect.width, rect.height, 0));
     }
 
     public void resize(float scale)
@@ -33,5 +33,9 @@ public abstract class Collideable : MonoBehaviour {
         rect = Rect.MinMaxRect(xMin, yMin, xMax, yMax);
     }
 
-    public abstract int collide(Vector2 bounceAmt);
+    void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireCube(transform.position, new Vector3(size.x, size.y));
+    }
 }

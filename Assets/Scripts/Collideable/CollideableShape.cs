@@ -6,9 +6,11 @@ public class CollideableShape
 {
 
     public Vector2[] points;
+    public string type;
     public CollideableShape(Vector2[] pArray)
     {
         points = pArray;
+        type = "shape";
     }
 
     public void translate(Vector2 pos){
@@ -32,8 +34,11 @@ public class CollideableShape
     {
         for (int i = 0; i < points.Length; i++)
         {
-            Vector2 cPoint -=center;
-            Vector2 nPoint = new Vector2(cPoint*sin)
+            float s = Mathf.Sin(amount);
+            float c = Mathf.Cos(amount);
+            Vector2 cPoint = points[i]-center;
+            Vector2 nPoint = new Vector2(cPoint.x*c - cPoint.y*s,cPoint.x*s + cPoint.y*c);
+            points[i] += center;
         }
     }
 

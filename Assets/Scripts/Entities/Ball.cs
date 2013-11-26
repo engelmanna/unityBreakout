@@ -24,7 +24,7 @@ public class Ball : Entity
         if (health == 0)
         {
             LevelManager.Instance.restartBall();
-            CollideableManager.Instance.removeBody(gameObject);
+            CollideableManager.Instance.removeBody(coll);
             StartCoroutine("death");
             return true;
         }

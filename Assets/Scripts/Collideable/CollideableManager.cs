@@ -6,11 +6,9 @@ public class CollideableManager : MonoBehaviour {
 
     static CollideableManager instance;
 
-    private List<GameObject> deadColliders;
-    private List<GameObject> deadDynamicColliders;
-
-    private List<CollideableMover> colliders;
-    private List<CollideableMover> newDynamicColliders;
+    private List<Collideable> colliders;
+    private List<Collideable> newColliders;
+    private List<Collideable> deadColliders;
 
     public static CollideableManager Instance
     {
@@ -31,27 +29,24 @@ public class CollideableManager : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-
-        deadColliders = new List<GameObject>();
-        newDynamicColliders = new List<CollideableMover>();
-
-        colliders = new List<CollideableMover>(FindObjectsOfType<CollideableMover>());
-
+        colliders = new List<Collideable>(FindObjectsOfType<Collideable>());
+        deadColliders = new List<Collideable>();
+        newColliders = new List<Collideable>();
 	}
 	
 	// Update is called once per frame
 	void Update () {
 
-        foreach (CollideableMover nGo in newDynamicColliders)
+        foreach (Collideable nGo in newColliders)
             colliders.Add(nGo);
 
-        newDynamicColliders.Clear();
+        newColliders.Clear();
 
-        foreach (CollideableMover collA in colliders)
+        foreach (Collideable collA in colliders)
         {
-            foreach(CollideableMover collB in colliders)
+            foreach(Collideable collB in colliders)
             {
-                if (collA != collB)
+                if (collA != collB && !(collA.isStatic && collB.isStatic))
                 {
                     if (collA.Rectangle.Overlaps(collB.Rectangle))
                     {
@@ -65,23 +60,21 @@ public class CollideableManager : MonoBehaviour {
             }
         }
 
-        foreach (GameObject db in deadColliders)
-        {
-            colliders.Remove(db.GetComponent<CollideableMover>());
-        }
+        foreach (Collideable db in deadColliders)
+            colliders.Remove(db.GetComponent<Collideable>());
 
         deadColliders.Clear();
 
 	}
 
-    public void addDynamicBody(CollideableMover cm)
+    public void addBody(Collideable cm)
     {
-        newDynamicColliders.Add(cm);
+        newColliders.Add(cm);
     }
 
-    public void removeBody(GameObject go)
+    public void removeBody(Collideable cm)
     {
-        deadColliders.Add(go);
+        deadColliders.Add(cm);
     }
 
 }

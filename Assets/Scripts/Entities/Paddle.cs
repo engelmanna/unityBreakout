@@ -8,12 +8,10 @@ public class Paddle : Entity
 	void Update () {
 
         if (Input.GetKey(KeyCode.A))
-            coll.velocity.x = -20;
+            coll.setVelocity(-20,0);
 
         if (Input.GetKey(KeyCode.D))
-            coll.velocity.x = 20;
-
-        coll.velocity.x *= 0.8f;  
+            coll.setVelocity(20, 0);
 	}
 
 

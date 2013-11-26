@@ -22,7 +22,7 @@ public class Block : Entity {
             
         if (health == 0)
         {
-            CollideableManager.Instance.removeBody(gameObject);
+            CollideableManager.Instance.removeBody(coll);
             StartCoroutine("death");
             return true;
         }

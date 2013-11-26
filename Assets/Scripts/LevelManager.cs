@@ -30,9 +30,10 @@ public class LevelManager : MonoBehaviour
         lives--;
         if (lives < 0)
             restartLevel();
+
         GameObject bl = Instantiate(ball) as GameObject;
-        bl.GetComponent<CollideableMover>().velocity = new Vector2(10, 10);
-        CollideableManager.Instance.addDynamicBody(bl.GetComponent<CollideableMover>());    
+        bl.GetComponent<Collideable>().setVelocity(10, 10);
+        CollideableManager.Instance.addBody(bl.GetComponent<Collideable>());    
     }
 
     public void restartLevel()

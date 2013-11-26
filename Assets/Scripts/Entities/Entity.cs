@@ -4,7 +4,7 @@ using System.Collections;
 public abstract class Entity : MonoBehaviour
 {
 
-    protected CollideableMover coll;
+    protected Collideable coll;
     protected int attack;
     public int Attack {
         get { return attack; }
@@ -22,7 +22,7 @@ public abstract class Entity : MonoBehaviour
     {
         attack = 0;
         health = -1;
-        coll = gameObject.GetComponent<CollideableMover>();
+        coll = gameObject.GetComponent<Collideable>();
     }
 
     //Called whenever an entity collides with something.

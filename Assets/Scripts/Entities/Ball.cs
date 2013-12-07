@@ -4,42 +4,31 @@ using System.Collections.Generic;
 
 public class Ball : Entity
 {
+
+    public float maxSpeed = 20;
     protected override void Start()
     {
         base.Start();
-        coll.resize(0.5f);
+        coll.AddForce(new Vector2(0, 800));
         attack = 1;
         health = 10;
     }
 
-    public override bool onHit(int atkValue)
+    void FixedUpdate()
     {
-        if (health >= 0)
+        if (coll.velocity != Vector2.zero)
         {
-            health -= atkValue;
-            if (health < 0)
-                health = 0;
+            coll.velocity *= (maxSpeed / coll.velocity.magnitude);
         }
-            
-        if (health == 0)
-        {
-            LevelManager.Instance.restartBall();
-            CollideableManager.Instance.removeBody(coll);
-            StartCoroutine("death");
-            return true;
-        }
-
-        return false;
     }
-
-    IEnumerator death()
+    void OnCollisionEnter2D(Collision2D collision)
     {
-        while (transform.localScale.x > 0)
+        if (collision.gameObject.tag == "Paddle")
         {
-            coll.resize(transform.localScale.x - 0.1f);
-            yield return Time.deltaTime;
+            float offset = collision.transform.position.x - transform.position.x;
+            coll.AddForce(new Vector2(offset * 150, 0));
         }
-        GameObject.Destroy(gameObject);
+        
     }
 
 }

@@ -10,35 +10,28 @@ public class Block : Entity {
         base.Start();
         health = startHealth;
         updateColor();
+        
     }
 
-    public override bool onHit(int atkValue)
+    void OnCollisionEnter2D(Collision2D coll)
     {
-        if (health >= 0)
+        
+        if (coll.gameObject.tag == "Ball")
         {
-            health -= atkValue;
-            updateColor();
-        }
-            
-        if (health == 0)
-        {
-            CollideableManager.Instance.removeBody(coll);
-            StartCoroutine("death");
-            return true;
-        }
+            coll.gameObject.GetComponent<Ball>().maxSpeed = 12 + health*3;
+            if (health >= 0)
+            {
+                health -= 1;
+                updateColor();
+            }
 
-        return false;
+            if (health == 0)
+            {
+                GameObject.Destroy(gameObject);
+            }
+        }
     }
 
-    IEnumerator death()
-    {
-        while (transform.localScale.x > 0)
-        {
-            coll.resize(transform.localScale.x-0.1f);
-            yield return Time.deltaTime;
-        }
-        GameObject.Destroy(gameObject); 
-    }
 
     private void updateColor()
     {

@@ -3,16 +3,24 @@ using System.Collections;
 
 public class Paddle : Entity
 {
+    float xVel = 0;
+    float moveSpeed = 0.1f;
 
 	// Update is called once per frame
-	void Update () {
+	void FixedUpdate () {
 
         if (Input.GetKey(KeyCode.A))
-            coll.setVelocity(-20,0);
+            xVel -= moveSpeed;
 
         if (Input.GetKey(KeyCode.D))
-            coll.setVelocity(20, 0);
-	}
+            xVel += moveSpeed;
 
+        if (transform.position.x > 8 || transform.position.x < -8)
+            xVel *= -1;
+
+        transform.Translate(xVel, 0, 0);
+        xVel *= 0.5f;
+
+	}
 
 }

@@ -3,26 +3,29 @@ using System.Collections;
 
 public abstract class Entity : MonoBehaviour
 {
+    public bool invincible = false;
 
-    protected Rigidbody2D coll;
-    protected int attack;
-
+    protected int attack = 0;
     public int Attack {
         get { return attack; }
         set { attack = value; }
     }
 
-    protected int health;
+    protected int health = 1;
     public int Health
     {
         get { return health; }
         set { health = value; }
     }
     
-    protected virtual void Start()
+    protected virtual void Start() { }
+
+    protected virtual void OnCollisionEnter2D(Collision2D coll)
     {
-        attack = 0;
-        health = -1;
-        coll = gameObject.rigidbody2D;
+        if (!invincible)
+            health -= coll.gameObject.GetComponent<Entity>().Attack;
+
+        if (health == 0)
+            GameObject.Destroy(gameObject);
     }
 }

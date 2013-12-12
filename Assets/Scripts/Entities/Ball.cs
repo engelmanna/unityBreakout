@@ -9,24 +9,31 @@ public class Ball : Entity
     protected override void Start()
     {
         base.Start();
-        coll.AddForce(new Vector2(0, 800));
+        gameObject.rigidbody2D.AddForce(new Vector2(800, 800));
         attack = 1;
         health = 10;
     }
 
     void FixedUpdate()
     {
-        if (coll.velocity != Vector2.zero)
+        if (gameObject.rigidbody2D.velocity != Vector2.zero)
         {
-            coll.velocity *= (maxSpeed / coll.velocity.magnitude);
+            gameObject.rigidbody2D.velocity *= (maxSpeed / gameObject.rigidbody2D.velocity.magnitude);
         }
     }
-    void OnCollisionEnter2D(Collision2D collision)
+
+    protected override void OnCollisionEnter2D(Collision2D coll)
     {
-        if (collision.gameObject.tag == "Paddle")
+        base.OnCollisionEnter2D(coll);
+        if (coll.gameObject.tag == "Paddle")
         {
-            float offset = collision.transform.position.x - transform.position.x;
-            coll.AddForce(new Vector2(offset * 150, 0));
+            float offset = coll.transform.position.x - transform.position.x;
+            gameObject.rigidbody2D.AddForce(new Vector2(offset * 150, 0));
+        }
+
+        if (coll.gameObject.tag == "Block")
+        {
+            maxSpeed = 12 + coll.gameObject.GetComponent<Block>().Health * 3;
         }
         
     }

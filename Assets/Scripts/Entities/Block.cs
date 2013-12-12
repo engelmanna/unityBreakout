@@ -5,31 +5,18 @@ public class Block : Entity {
 
     Color cColor = Color.white;
     public int startHealth;
+
     protected override void Start()
     {
         base.Start();
         health = startHealth;
         updateColor();
-        
     }
 
-    void OnCollisionEnter2D(Collision2D coll)
+    protected override void OnCollisionEnter2D(Collision2D coll)
     {
-        
-        if (coll.gameObject.tag == "Ball")
-        {
-            coll.gameObject.GetComponent<Ball>().maxSpeed = 12 + health*3;
-            if (health >= 0)
-            {
-                health -= 1;
-                updateColor();
-            }
-
-            if (health == 0)
-            {
-                GameObject.Destroy(gameObject);
-            }
-        }
+        base.OnCollisionEnter2D(coll);
+        updateColor();
     }
 
 

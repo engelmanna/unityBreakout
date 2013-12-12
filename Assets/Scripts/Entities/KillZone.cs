@@ -7,5 +7,6 @@ public class KillZone : Entity {
     {
         base.Start();
         attack = 1000;
+        invincible = true;
     }
 }

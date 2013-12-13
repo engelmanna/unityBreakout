@@ -6,10 +6,13 @@ public class Paddle : Entity
     float xVel = 0;
     float moveSpeed = 0.06f;
 
+    Vector3 scVec;
     protected override void Start()
     {
         base.Start();
         invincible = true;
+        scVec = new Vector3(1, 1, 1);
+        transform.localScale = scVec;
     }
 
 	//Using Fixed update instead of update because of Rigid bodies
@@ -31,4 +34,6 @@ public class Paddle : Entity
         if (transform.position.x - 1.5f < -8)
             transform.Translate(-(transform.position.x - 1.5f + 8), 0, 0);
 	}
+
+
 }

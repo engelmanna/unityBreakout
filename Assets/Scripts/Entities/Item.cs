@@ -14,10 +14,21 @@ public class Item : MonoBehaviour
     void Update()
     {
         transform.Translate(0, -0.1f, 0);
-        if (transform.position.y<-10)
+        if (transform.position.y<-15)
         {
-            transform.Translate(0, 10, 0);
+            Destroy(gameObject);
         }
+    }
+
+    void OnTriggerEnter2D(Collider2D coll)
+    {
+        if (coll.tag == "Paddle")
+        {
+            coll.gameObject.AddComponent<PowerUp>();
+            Destroy(gameObject);
+        }
+        
+        
     }
 
     

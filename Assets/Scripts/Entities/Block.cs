@@ -5,6 +5,7 @@ public class Block : Entity {
 
     Color cColor = Color.white;
     public int startHealth;
+    public GameObject item;
 
     protected override void Start()
     {
@@ -16,7 +17,20 @@ public class Block : Entity {
     protected override void OnCollisionEnter2D(Collision2D coll)
     {
         base.OnCollisionEnter2D(coll);
+
+        if (health <= 0 && !invincible)
+        {
+            if (item != null)
+            {
+                GameObject itm = Instantiate(item) as GameObject;
+                itm.transform.position = transform.position;
+            }
+            GameObject.Destroy(gameObject);
+        }
+
         updateColor();
+
+
     }
 
 

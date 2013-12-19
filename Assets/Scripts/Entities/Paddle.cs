@@ -28,12 +28,14 @@ public class Paddle : Entity
         xVel *= 0.8f;
 
         //Keep paddle in bounds
-        if (transform.position.x+1.5f > 8)
-            transform.Translate(-(transform.position.x + 1.5f-8), 0, 0);
+        if (transform.position.x+1.5f*transform.localScale.x > 8)
+            transform.Translate(-(transform.position.x + 1.5f * transform.localScale.x - 8), 0, 0);
 
-        if (transform.position.x - 1.5f < -8)
-            transform.Translate(-(transform.position.x - 1.5f + 8), 0, 0);
+        if (transform.position.x - 1.5f*transform.localScale.x < -8)
+            transform.Translate(-(transform.position.x - 1.5f * transform.localScale.x + 8), 0, 0);
 	}
+
+    
 
 
 }

@@ -25,7 +25,6 @@ public abstract class Entity : MonoBehaviour
         if (!invincible)
             health -= coll.gameObject.GetComponent<Entity>().Attack;
 
-        if (health == 0)
-            GameObject.Destroy(gameObject);
+        
     }
 }

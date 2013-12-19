@@ -23,25 +23,29 @@ public class PowerUp : MonoBehaviour
 
     IEnumerator Activate(){
         float i = 0.0f;
+        Paddle paddleScript = gameObject.GetComponent<Paddle>();
         while (i < 1)
         {
             float scalar = Mathf.Lerp(1, 2, i);
-            transform.localScale = new Vector3(scalar, 1, 1);
+            paddleScript.setWidth(3 * scalar);
             i += 0.05f;
             yield return true;
         }
+        paddleScript.setWidth(6);
     }
 
     IEnumerator Deactivate()
     {
         float i = 1.0f;
+        Paddle paddleScript = gameObject.GetComponent<Paddle>();
         while (i > 0)
         {
             float scalar = Mathf.Lerp(1, 2, i);
-            transform.localScale = new Vector3(scalar, 1, 1);
+            paddleScript.setWidth(3 * scalar);
             i -= 0.05f;
             yield return true;
         }
+        paddleScript.setWidth(3);
         Destroy(this);
     }
 }

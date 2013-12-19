@@ -5,6 +5,10 @@ public class Paddle : Entity
 {
     float xVel = 0;
     float moveSpeed = 0.06f;
+    public GameObject paddleCenter;
+    public GameObject paddleLeft;
+    public GameObject paddleRight;
+    BoxCollider2D paddleCollider;
 
     Vector3 scVec;
     protected override void Start()
@@ -13,6 +17,8 @@ public class Paddle : Entity
         invincible = true;
         scVec = new Vector3(1, 1, 1);
         transform.localScale = scVec;
+        paddleCollider = gameObject.collider2D as BoxCollider2D;
+        setWidth(3);
     }
 
 	//Using Fixed update instead of update because of Rigid bodies
@@ -35,6 +41,13 @@ public class Paddle : Entity
             transform.Translate(-(transform.position.x - 1.5f * transform.localScale.x + 8), 0, 0);
 	}
 
+    public void setWidth(float width){
+        paddleLeft.transform.localPosition = new Vector3(width * 0.5f, 0, 0);
+        paddleRight.transform.localPosition = new Vector3(-width * 0.5f, 0, 0);
+        paddleCenter.transform.localScale = new Vector3(width - 0.6f, 1, 1);
+        paddleCollider.size = new Vector2(width, 1);
+
+    }
     
 
 

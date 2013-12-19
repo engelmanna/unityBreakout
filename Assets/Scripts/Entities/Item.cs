@@ -22,7 +22,7 @@ public class Item : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D coll)
     {
-        if (coll.tag == "Paddle")
+        if (coll.gameObject.tag == "Paddle")
         {
             coll.gameObject.AddComponent<PowerUp>();
             Destroy(gameObject);

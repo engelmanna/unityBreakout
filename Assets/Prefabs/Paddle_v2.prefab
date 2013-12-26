@@ -241,9 +241,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   invincible: 1
-  paddleCenter: {fileID: 100004}
-  paddleLeft: {fileID: 100002}
-  paddleRight: {fileID: 100000}
+  paddleCenter: {fileID: 100002, guid: 82236230af1b6a2489cdc034a18c7976, type: 3}
+  paddleLeft: {fileID: 100004, guid: 82236230af1b6a2489cdc034a18c7976, type: 3}
+  paddleRight: {fileID: 100008, guid: 82236230af1b6a2489cdc034a18c7976, type: 3}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

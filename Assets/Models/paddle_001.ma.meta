@@ -1,0 +1,179 @@
+fileFormatVersion: 2
+guid: 29016bbd3389e364c87f81c9a7e58c79
+ModelImporter:
+  serializedVersion: 15
+  fileIDToRecycleName:
+    100000: //RootNode
+    100002: paddle_bn_left
+    100004: paddle_bn_right
+    100006: paddle_bn_root
+    100008: pdl_core
+    100010: pdl_expandable
+    100012: pdl_left
+    100014: pdl_right
+    100016: rocket_left
+    100018: rocket_right
+    400000: //RootNode
+    400002: paddle_bn_left
+    400004: paddle_bn_right
+    400006: paddle_bn_root
+    400008: pdl_core
+    400010: pdl_expandable
+    400012: pdl_left
+    400014: pdl_right
+    400016: rocket_left
+    400018: rocket_right
+    2300000: rocket_left
+    2300002: rocket_right
+    3300000: rocket_left
+    3300002: rocket_right
+    4300000: pdl_expandable
+    4300002: pdl_right
+    4300004: pdl_left
+    4300006: pdl_core
+    4300008: rocket_left
+    4300010: rocket_right
+    7400000: Expand
+    7400002: Base
+    9500000: //RootNode
+    11100000: //RootNode
+    13700000: pdl_core
+    13700002: pdl_expandable
+    13700004: pdl_left
+    13700006: pdl_right
+  materials:
+    importMaterials: 1
+    materialName: 1
+    materialSearch: 2
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    optimizeGameObjects: 0
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Expand
+      takeName: Take 001
+      firstFrame: 9
+      lastFrame: 10
+      wrapMode: 1
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: paddle_bn_root
+        weight: 1
+      - path: paddle_bn_root/paddle_bn_left
+        weight: 1
+      - path: paddle_bn_root/paddle_bn_right
+        weight: 1
+      - path: pdl_core
+        weight: 1
+      - path: pdl_expandable
+        weight: 1
+      - path: pdl_left
+        weight: 1
+      - path: pdl_right
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: Base
+      takeName: Take 001
+      firstFrame: 1
+      lastFrame: 1.10000002
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: paddle_bn_root
+        weight: 1
+      - path: paddle_bn_root/paddle_bn_left
+        weight: 1
+      - path: paddle_bn_root/paddle_bn_right
+        weight: 1
+      - path: pdl_core
+        weight: 1
+      - path: pdl_expandable
+        weight: 1
+      - path: pdl_left
+        weight: 1
+      - path: pdl_right
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 0
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 0
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: paddle_bn_root
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 1
+  userData: 

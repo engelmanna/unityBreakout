@@ -97,8 +97,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   invincible: 0
-  startHealth: 0
+  startHealth: 3
   item: {fileID: 0}
+  particle: {fileID: 100000, guid: 5aea244c1b0ebba4a80c4a039585d185, type: 2}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

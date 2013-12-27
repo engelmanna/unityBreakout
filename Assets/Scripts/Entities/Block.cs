@@ -6,6 +6,7 @@ public class Block : Entity {
     Color cColor = Color.white;
     public int startHealth;
     public GameObject item;
+    public GameObject particle;
 
     protected override void Start()
     {
@@ -17,7 +18,7 @@ public class Block : Entity {
     protected override void OnCollisionEnter2D(Collision2D coll)
     {
         base.OnCollisionEnter2D(coll);
-
+        
         if (health <= 0 && !invincible)
         {
             if (item != null)
@@ -25,12 +26,16 @@ public class Block : Entity {
                 GameObject itm = Instantiate(item) as GameObject;
                 itm.transform.position = transform.position;
             }
+            particle.particleSystem.renderer.material = gameObject.renderer.material;
+            particle.renderer.material.SetColor("_Emission", Color.blue);
+            
+            Instantiate(particle,transform.position,Quaternion.identity);
+            
             GameObject.Destroy(gameObject);
+            
         }
 
         updateColor();
-
-
     }
 
 

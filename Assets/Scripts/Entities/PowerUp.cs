@@ -4,18 +4,20 @@ using System.Collections;
 public class PowerUp : MonoBehaviour
 {
 
-    float myTime;
+    public float startTime;
+    public float duration;
     // Use this for initialization
     void Start()
     {
-        myTime = Time.time;
+        startTime = Time.time;
         StartCoroutine("Activate");
+        duration = 5;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Time.time - myTime > 5)
+        if (Time.time - startTime > duration)
         {
             StartCoroutine("Deactivate");
         }
@@ -27,7 +29,7 @@ public class PowerUp : MonoBehaviour
         while (i < 1)
         {
             float scalar = Mathf.Lerp(1, 2, i);
-            paddleScript.setWidth(3 * scalar);
+            paddleScript.setWidth(3*scalar);
             i += 0.05f;
             yield return true;
         }
@@ -36,16 +38,21 @@ public class PowerUp : MonoBehaviour
 
     IEnumerator Deactivate()
     {
-        float i = 1.0f;
+        float i = 0.0f;
         Paddle paddleScript = gameObject.GetComponent<Paddle>();
-        while (i > 0)
+        while (i < 1)
         {
-            float scalar = Mathf.Lerp(1, 2, i);
-            paddleScript.setWidth(3 * scalar);
-            i -= 0.05f;
+            float scalar = Mathf.Lerp(2, 1, i);
+            paddleScript.setWidth(3*scalar);
+            i += 0.05f;
             yield return true;
         }
         paddleScript.setWidth(3);
         Destroy(this);
+    }
+
+    public void ResetTimer()
+    {
+        startTime = Time.time;
     }
 }

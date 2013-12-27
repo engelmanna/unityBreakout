@@ -3,7 +3,7 @@ using System.Collections;
 
 public class Item : MonoBehaviour
 {
-
+    
     // Use this for initialization
     void Start()
     {
@@ -24,7 +24,15 @@ public class Item : MonoBehaviour
     {
         if (coll.gameObject.tag == "Paddle")
         {
-            coll.gameObject.AddComponent<PowerUp>();
+            if (coll.gameObject.GetComponent<PowerUp>() != null)
+            {
+                coll.gameObject.GetComponent<PowerUp>().ResetTimer();
+            }
+            else
+            {
+                coll.gameObject.AddComponent<PowerUp>();
+            }
+            
             Destroy(gameObject);
         }
         

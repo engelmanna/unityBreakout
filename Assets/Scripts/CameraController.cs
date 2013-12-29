@@ -19,7 +19,7 @@ public class CameraController : MonoBehaviour {
 
         transform.position = new Vector3(-lookAt.transform.position.x * 0.25f, transform.position.y, transform.position.z);
 
-        transform.LookAt(new Vector3(lookAt.transform.position.x*0.08f,-1,0));
+        transform.LookAt(new Vector3(lookAt.transform.position.x * 0.08f, -1 ,0));
         
 	}
 

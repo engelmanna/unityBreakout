@@ -7,7 +7,7 @@ public class Paddle : Entity
     float moveSpeed = 0.06f;
     float halfSize = 1.5f;
 
-    PowerUp currentPower;
+    public PowerUp currentPower;
     BoxCollider2D paddleCollider;
 
     public Transform bnLeft;
@@ -18,12 +18,13 @@ public class Paddle : Entity
     protected override void Start()
     {
         base.Start();
-        paddleCollider = gameObject.collider2D as BoxCollider2D;        
+        paddleCollider = gameObject.collider2D as BoxCollider2D;
+        Camera.main.GetComponent<CameraController>().lookAt = gameObject;
     }
 
 	//Using Fixed update instead of update because of Rigid bodies
 	void FixedUpdate () {
-        
+
         //Apply thrust. Turn on thrusters if key is down
         if (Input.GetKey(KeyCode.A)) { 
             xVel -= moveSpeed;

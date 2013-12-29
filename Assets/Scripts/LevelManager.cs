@@ -7,6 +7,9 @@ public class LevelManager : MonoBehaviour
 
     public int lives;
     public GameObject ball;
+    public GameObject paddle;
+    Ball ballScript;
+    Paddle paddleScript;
 
     public static LevelManager Instance
     {
@@ -25,17 +28,46 @@ public class LevelManager : MonoBehaviour
         }
     }
 
+    void Start()
+    {
+        GameObject ballObj = Instantiate(ball) as GameObject;
+        ballScript = ballObj.GetComponent<Ball>();
+
+        GameObject paddleObj = Instantiate(paddle,new Vector3(0,-7,0),Quaternion.identity) as GameObject;
+        paddleScript = paddleObj.GetComponent<Paddle>();
+
+        ballScript.parent = paddleObj;
+
+    }
+
+    void Update()
+    {
+        if (Input.GetKey(KeyCode.Space) && ballScript.state == BallState.Born)
+        {
+            ballScript.Launch();
+        }
+    }
     public void restartBall()
     {
         lives--;
         if (lives < 0)
-            restartLevel();
+        {
+            Application.LoadLevel(0);
+        }
+        GameObject[] items = GameObject.FindGameObjectsWithTag("Item");
+        for (int i = 0; i < items.Length; i++)
+        {
+            Destroy(items[i]);
+        }
+            ballScript.state = BallState.Dead;
 
-        Instantiate(ball);   
+            GameObject ballObj = Instantiate(ball,new Vector3(paddleScript.transform.position.x,paddleScript.transform.position.y+1,0),Quaternion.identity) as GameObject;
+            ballScript = ballObj.GetComponent<Ball>();
+            ballScript.parent = paddleScript.gameObject;
+        
+        if(paddleScript.currentPower!=null)
+            paddleScript.currentPower.duration = 0;
     }
 
-    public void restartLevel()
-    {
-        Application.LoadLevel(0);
-    }
+
 }

@@ -26,6 +26,7 @@ public class PowerUp : MonoBehaviour
     IEnumerator Activate(){
         float i = 0.0f;
         Paddle paddleScript = gameObject.GetComponent<Paddle>();
+        paddleScript.currentPower = this;
         while (i < 1)
         {
             float scalar = Mathf.Lerp(1, 2, i);

@@ -10,6 +10,8 @@ public class LevelManager : MonoBehaviour
     public GameObject paddle;
     Ball ballScript;
     Paddle paddleScript;
+    public Vector2 startPos;
+    public Vector2 levelSize;
 
     public static LevelManager Instance
     {
@@ -33,7 +35,7 @@ public class LevelManager : MonoBehaviour
         GameObject ballObj = Instantiate(ball) as GameObject;
         ballScript = ballObj.GetComponent<Ball>();
 
-        GameObject paddleObj = Instantiate(paddle,new Vector3(0,-7,0),Quaternion.identity) as GameObject;
+        GameObject paddleObj = Instantiate(paddle,startPos,Quaternion.identity) as GameObject;
         paddleScript = paddleObj.GetComponent<Paddle>();
 
         ballScript.parent = paddleObj;
@@ -65,8 +67,8 @@ public class LevelManager : MonoBehaviour
             ballScript = ballObj.GetComponent<Ball>();
             ballScript.parent = paddleScript.gameObject;
         
-        if(paddleScript.currentPower!=null)
-            paddleScript.currentPower.duration = 0;
+        if(paddleScript.CurrentPower!=null)
+            paddleScript.CurrentPower.duration = 0;
     }
 
 

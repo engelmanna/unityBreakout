@@ -6,8 +6,8 @@ Material:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: M_bg
-  m_Shader: {fileID: 10750, guid: 0000000000000000f000000000000000, type: 0}
+  m_Name: M_trail
+  m_Shader: {fileID: 200, guid: 0000000000000000f000000000000000, type: 0}
   m_ShaderKeywords: []
   m_CustomRenderQueue: -1
   m_SavedProperties:
@@ -17,18 +17,14 @@ Material:
         first:
           name: _MainTex
         second:
-          m_Texture: {fileID: 2800000, guid: 34e6bd7e6634a35449f826ed570a543a, type: 3}
-          m_Scale: {x: 8, y: 8}
+          m_Texture: {fileID: 2800000, guid: 6d993808229131047b7fef578ed1a92b, type: 3}
+          m_Scale: {x: 1, y: 1}
           m_Offset: {x: 0, y: 0}
     m_Floats:
       data:
         first:
-          name: _Cutoff
-        second: .0714285746
-      data:
-        first:
-          name: _Shininess
-        second: .100000016
+          name: _InvFade
+        second: 1
     m_Colors:
       data:
         first:
@@ -36,9 +32,5 @@ Material:
         second: {r: 1, g: 1, b: 1, a: 1}
       data:
         first:
-          name: _SpecColor
-        second: {r: 1, g: 1, b: 1, a: 0}
-      data:
-        first:
-          name: _Emission
-        second: {r: 1, g: 1, b: 1, a: 0}
+          name: _TintColor
+        second: {r: .5, g: .5, b: .5, a: .5}

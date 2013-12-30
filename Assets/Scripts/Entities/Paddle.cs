@@ -7,19 +7,40 @@ public class Paddle : Entity
     float moveSpeed = 0.06f;
     float halfSize = 1.5f;
 
-    public PowerUp currentPower;
-    BoxCollider2D paddleCollider;
+    PowerUp currentPower;
+    public PowerUp CurrentPower
+    {
+        get { return currentPower; }
+        set
+        {
+            if (currentPower != null)
+            {
+                currentPower.Reset();
+            }
+            else
+            {
+                currentPower = value;
+            }
+        }
+    }
 
-    public Transform bnLeft;
-    public Transform bnRight;
-    public GameObject fireLeft;
-    public GameObject fireRight;
+    BoxCollider2D paddleCollider;
+    Transform bnLeft;
+    Transform bnRight;
+    GameObject fireLeft;
+    GameObject fireRight;
 
     protected override void Start()
     {
         base.Start();
-        paddleCollider = gameObject.collider2D as BoxCollider2D;
+
         Camera.main.GetComponent<CameraController>().lookAt = gameObject;
+
+        paddleCollider =    gameObject.collider2D as BoxCollider2D;
+        bnLeft =            transform.Find("paddle_bn_root/paddle_bn_left");
+        bnRight =           transform.Find("paddle_bn_root/paddle_bn_right");
+        fireLeft =          GameObject.Find("rocket_left");
+        fireRight =         GameObject.Find("rocket_right");
     }
 
 	//Using Fixed update instead of update because of Rigid bodies
@@ -29,7 +50,6 @@ public class Paddle : Entity
         if (Input.GetKey(KeyCode.A)) { 
             xVel -= moveSpeed;
             fireLeft.SetActive(true);
-            fireLeft.transform.localScale = new Vector3(Random.Range(0.9f,1.1f), 1, 1);
         }
         else
         {
@@ -39,7 +59,6 @@ public class Paddle : Entity
         if (Input.GetKey(KeyCode.D)) { 
             xVel += moveSpeed;
             fireRight.SetActive(true);
-            fireRight.transform.localScale = new Vector3(Random.Range(0.9f, 1.1f), 1, 1);
         }
         else
         {
@@ -50,24 +69,28 @@ public class Paddle : Entity
         //TODO: lock Y translation
         transform.Translate(xVel, 0, 0, Space.World);
         transform.eulerAngles = new Vector3(0, 0, xVel*5);
-
-
-        xVel *= 0.8f;
         
         //Keep paddle in bounds
         //TODO: Get level bounds from Level manager
         if (transform.position.x + halfSize > 8)
-            transform.Translate(-(transform.position.x + halfSize - 8), 0, 0);
+            transform.Translate(-(transform.position.x + halfSize + LevelManager.Instance.levelSize.x), 0, 0);
 
         if (transform.position.x - halfSize < -8)
-            transform.Translate(-(transform.position.x - halfSize + 8), 0, 0);
+            transform.Translate(-(transform.position.x - halfSize + LevelManager.Instance.levelSize.y), 0, 0);
+
+
+        transform.position = new Vector3(transform.position.x, LevelManager.Instance.startPos.y);
+
+        //Decay sideways velocity
+        xVel *= 0.8f;
+
 	}
 
     //Takes care of all the stretching and squashing of the paddle
-    public void setWidth(float width){
+    public void SetWidth(float width){
         halfSize = width / 2;
-        bnLeft.localPosition = new Vector3(width / 2, 0, 0);
-        bnRight.localPosition = new Vector3(-width / 2, 0, 0);
+        bnLeft.localPosition = new Vector3(halfSize, 0, 0);
+        bnRight.localPosition = new Vector3(-halfSize, 0, 0);
         paddleCollider.size = new Vector2(width, 0.25f);
     }
 }

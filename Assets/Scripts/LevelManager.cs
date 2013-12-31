@@ -32,11 +32,11 @@ public class LevelManager : MonoBehaviour
 
     void Start()
     {
-        GameObject ballObj = Instantiate(ball) as GameObject;
-        ballScript = ballObj.GetComponent<Ball>();
-
         GameObject paddleObj = Instantiate(paddle,startPos,Quaternion.identity) as GameObject;
         paddleScript = paddleObj.GetComponent<Paddle>();
+        
+        GameObject ballObj = Instantiate(ball) as GameObject;
+        ballScript = ballObj.GetComponent<Ball>();
 
         ballScript.parent = paddleObj;
 

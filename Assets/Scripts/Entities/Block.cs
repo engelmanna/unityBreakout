@@ -11,8 +11,10 @@ public class Block : Entity {
     protected override void Start()
     {
         base.Start();
+
         health = startHealth;
-        updateColor();
+        UpdateColor();
+        StartCoroutine("ScaleUp");
     }
 
     protected override void OnCollisionEnter2D(Collision2D coll)
@@ -35,11 +37,10 @@ public class Block : Entity {
             
         }
 
-        updateColor();
+        UpdateColor();
     }
 
-
-    private void updateColor()
+    private void UpdateColor()
     {
         switch (health)
         {
@@ -66,5 +67,21 @@ public class Block : Entity {
                 break;
         }
         gameObject.renderer.material.SetColor("_Emission", cColor);
+    }
+
+    IEnumerator ScaleUp()
+    {
+        float i = 0;
+        Vector3 tempScale = Vector3.zero;
+        float test = ((transform.position.x + LevelManager.Instance.levelSize.y/2) / LevelManager.Instance.levelSize.y) * 0.05f + 0.05f;
+        Vector3 growScale = new Vector3(test,test,test);
+        while (tempScale.x < 1)
+        {
+            transform.localScale = tempScale;
+            tempScale += growScale;
+
+            yield return false;
+        }
+        transform.localScale = Vector3.one;
     }
 }

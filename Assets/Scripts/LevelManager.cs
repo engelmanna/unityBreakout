@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class LevelManager : MonoBehaviour
 {
@@ -8,27 +9,14 @@ public class LevelManager : MonoBehaviour
     public int lives;
     public GameObject ball;
     public GameObject paddle;
-    Ball ballScript;
-    Paddle paddleScript;
+
+    public Ball ballScript;
+    public Paddle paddleScript;
     public Vector2 startPos;
     public Vector2 levelSize;
 
-    PowerUp currentPower;
-    public PowerUp CurrentPower
-    {
-        get { return currentPower; }
-        set
-        {
-            if (currentPower != null)
-            {
-                currentPower.Reset();
-            }
-            else
-            {
-                currentPower = value;
-            }
-        }
-    }
+    PowerUp CurrentPower;
+    List<PowerUp> powerupList = new List<PowerUp>();
 
     public static LevelManager Instance
     {
@@ -79,12 +67,40 @@ public class LevelManager : MonoBehaviour
             Destroy(items[i]);
         }
 
-            GameObject ballObj = Instantiate(ball,new Vector3(paddleScript.transform.position.x,paddleScript.transform.position.y+1,0),Quaternion.identity) as GameObject;
-            ballScript = ballObj.GetComponent<Ball>();
-            ballScript.parent = paddleScript.gameObject;
-        
-        if(currentPower!=null)
-            currentPower.duration = 0;
+        GameObject ballObj = Instantiate(ball,new Vector3(paddleScript.transform.position.x,paddleScript.transform.position.y+1,0),Quaternion.identity) as GameObject;
+        ballScript = ballObj.GetComponent<Ball>();
+        ballScript.parent = paddleScript.gameObject;
+
+        foreach (PowerUp pow in powerupList)
+        {
+            pow.duration = 0;
+        }
+    }
+
+    public void AddPowerup(PowerType pt){
+
+        foreach (PowerUp pow in powerupList)
+        {
+            if (pow.powType == pt)
+            {
+                pow.Reset();
+                return;
+            }
+        }
+
+        switch (pt)
+        {
+            case PowerType.EXTEND:
+                CurrentPower = gameObject.AddComponent<PowerUpExtend>();
+                break;
+            case PowerType.SLOW:
+                CurrentPower = gameObject.AddComponent<PowerUpSlow>();
+                break;
+            case PowerType.BARRIER:
+                CurrentPower = gameObject.AddComponent<PowerUpBarrier>();
+                break;
+            default: break;
+        }        
     }
 
 

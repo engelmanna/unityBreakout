@@ -14,8 +14,6 @@ public class PowerUpBarrier : PowerUp
         base.Start();
     }
 
-
-
     protected override void StartPowerup()
     {
         kzone.GetComponent<KillZone>().enabled = false;
@@ -25,10 +23,10 @@ public class PowerUpBarrier : PowerUp
 
     protected override void EndPowerup()
     {
+        Debug.Log("Ending Barrier");
         kzone.GetComponent<KillZone>().enabled = true;
         kzone.renderer.material.SetColor("_Emission", Color.red);
         kzone.renderer.material.SetColor("_Color", Color.red);
-        LevelManager.Instance.CurrentPower = null;
         Destroy(this);
     }
 }

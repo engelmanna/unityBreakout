@@ -96,7 +96,6 @@ public class Ball : Entity
             else
             {
                 coll.gameObject.GetComponent<KillZone>().enabled = true;
-                LevelManager.Instance.CurrentPower.duration = 0;
             }
         }
               

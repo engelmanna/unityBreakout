@@ -23,30 +23,27 @@ public class PowerUpExtend : PowerUp
 
     IEnumerator Activate(){
         float i = 0.0f;
-        Paddle paddleScript = gameObject.GetComponent<Paddle>();
         while (i < 1)
         {
             float scalar = Mathf.Lerp(1, 2, i);
-            paddleScript.SetWidth(3*scalar);
+            LevelManager.Instance.paddleScript.SetWidth(3 * scalar);
             i += 0.05f;
             yield return true;
         }
-        paddleScript.SetWidth(6);
+        LevelManager.Instance.paddleScript.SetWidth(6);
     }
 
     IEnumerator Deactivate()
     {
         float i = 0.0f;
-        Paddle paddleScript = gameObject.GetComponent<Paddle>();
         while (i < 1)
         {
             float scalar = Mathf.Lerp(2, 1, i);
-            paddleScript.SetWidth(3*scalar);
+            LevelManager.Instance.paddleScript.SetWidth(3 * scalar);
             i += 0.05f;
             yield return true;
         }
-        paddleScript.SetWidth(3);
-        LevelManager.Instance.CurrentPower = null;
+        LevelManager.Instance.paddleScript.SetWidth(3);
         Destroy(this);
     }
 }

@@ -31,27 +31,7 @@ public class Item : Entity
     {
         if (coll.gameObject.tag == "Paddle")
         {
-            if (LevelManager.Instance.CurrentPower != null && LevelManager.Instance.CurrentPower.powType == powerType)
-            {
-                LevelManager.Instance.CurrentPower.Reset();
-            }
-            else
-            {
-                switch (powerType)
-                {
-                    case PowerType.EXTEND:
-                        LevelManager.Instance.CurrentPower = coll.gameObject.AddComponent<PowerUpExtend>();
-                        break;
-                    case PowerType.SLOW:
-                        LevelManager.Instance.CurrentPower = coll.gameObject.AddComponent<PowerUpSlow>();
-                        break;
-                    case PowerType.BARRIER:
-                        LevelManager.Instance.CurrentPower = coll.gameObject.AddComponent<PowerUpBarrier>();
-                        break;
-                    default: break;
-                }
-            }
-                 
+            LevelManager.Instance.AddPowerup(powerType);  
             Destroy(gameObject);
         }
 

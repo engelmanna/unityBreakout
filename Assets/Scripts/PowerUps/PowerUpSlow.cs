@@ -15,7 +15,6 @@ public class PowerUpSlow : PowerUp
         base.Start();
     }
 
-
     protected override void StartPowerup()
     {
         Vector2 vel = ball.rigidbody2D.velocity;
@@ -27,7 +26,7 @@ public class PowerUpSlow : PowerUp
     {
         Vector2 vel = ball.rigidbody2D.velocity;
         vel.Scale(new Vector2(2, 2));
-        LevelManager.Instance.CurrentPower = null;
+        ball.rigidbody2D.velocity = vel;
         Destroy(this);
     }
 }

@@ -844,6 +844,10 @@ Prefab:
       propertyPath: m_LocalRotation.w
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: 6a5d1db1a06751745b6af9120539864d, type: 2}
+      propertyPath: item
+      value: 
+      objectReference: {fileID: 100004, guid: 363a0e0228280224e82c728466bc51c5, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6a5d1db1a06751745b6af9120539864d, type: 2}
   m_RootGameObject: {fileID: 126734761}
@@ -1024,7 +1028,7 @@ Prefab:
     - target: {fileID: 11400000, guid: 6a5d1db1a06751745b6af9120539864d, type: 2}
       propertyPath: item
       value: 
-      objectReference: {fileID: 100000, guid: 77499d2bac2ba0a40b245b6d2efbe4db, type: 2}
+      objectReference: {fileID: 100004, guid: 625b2276fad50e4488bea35a6f87b13f, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6a5d1db1a06751745b6af9120539864d, type: 2}
   m_RootGameObject: {fileID: 383759680}
@@ -1064,7 +1068,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   invincible: 0
   startHealth: 3
-  item: {fileID: 0}
+  item: {fileID: 100004, guid: 363a0e0228280224e82c728466bc51c5, type: 2}
   particle: {fileID: 100000, guid: 5aea244c1b0ebba4a80c4a039585d185, type: 2}
 --- !u!23 &126734763
 Renderer:
@@ -1174,6 +1178,10 @@ Prefab:
       propertyPath: startHealth
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: 6a5d1db1a06751745b6af9120539864d, type: 2}
+      propertyPath: item
+      value: 
+      objectReference: {fileID: 100004, guid: 7d858d186ebe45b4d90a5b55d4ccce0d, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6a5d1db1a06751745b6af9120539864d, type: 2}
   m_RootGameObject: {fileID: 836325555}
@@ -1306,6 +1314,8 @@ GameObject:
   - 50: {fileID: 194812229}
   - 61: {fileID: 194812228}
   - 114: {fileID: 194812231}
+  - 33: {fileID: 194812233}
+  - 23: {fileID: 194812232}
   m_Layer: 0
   m_Name: KillZone
   m_TagString: KillZone
@@ -1322,8 +1332,8 @@ BoxCollider2D:
   m_Enabled: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Size: {x: 25, y: 1}
-  m_Center: {x: 0, y: 0}
+  m_Size: {x: 10, y: 1}
+  m_Center: {x: 0, y: -.5}
 --- !u!50 &194812229
 Rigidbody2D:
   m_ObjectHideFlags: 0
@@ -1346,8 +1356,8 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 194812227}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -10.237443, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: -8, z: 0}
+  m_LocalScale: {x: 1.70000005, y: 1, z: .100000001}
   m_Children: []
   m_Father: {fileID: 467026715}
 --- !u!114 &194812231
@@ -1362,6 +1372,34 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   invincible: 0
+--- !u!23 &194812232
+Renderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 194812227}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_LightmapIndex: 255
+  m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
+  m_Materials:
+  - {fileID: 2100000, guid: eb64d1c9b70d35f41bf869907248e676, type: 2}
+  m_SubsetIndices: 
+  m_StaticBatchRoot: {fileID: 0}
+  m_UseLightProbes: 0
+  m_LightProbeAnchor: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_SortingLayerID: 0
+--- !u!33 &194812233
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 194812227}
+  m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1001 &232454380
 Prefab:
   m_ObjectHideFlags: 0
@@ -2326,7 +2364,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   invincible: 0
   startHealth: 1
-  item: {fileID: 100000, guid: 77499d2bac2ba0a40b245b6d2efbe4db, type: 2}
+  item: {fileID: 100004, guid: 625b2276fad50e4488bea35a6f87b13f, type: 2}
   particle: {fileID: 100000, guid: 5aea244c1b0ebba4a80c4a039585d185, type: 2}
 --- !u!23 &383759682
 Renderer:
@@ -3892,7 +3930,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   invincible: 0
   startHealth: 2
-  item: {fileID: 0}
+  item: {fileID: 100004, guid: 7d858d186ebe45b4d90a5b55d4ccce0d, type: 2}
   particle: {fileID: 100000, guid: 5aea244c1b0ebba4a80c4a039585d185, type: 2}
 --- !u!23 &836325557
 Renderer:
@@ -6172,7 +6210,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   invincible: 0
   startHealth: 1
-  item: {fileID: 100000, guid: 77499d2bac2ba0a40b245b6d2efbe4db, type: 2}
+  item: {fileID: 100004, guid: 363a0e0228280224e82c728466bc51c5, type: 2}
   particle: {fileID: 100000, guid: 5aea244c1b0ebba4a80c4a039585d185, type: 2}
 --- !u!23 &1416046714
 Renderer:
@@ -6715,7 +6753,7 @@ Prefab:
     - target: {fileID: 11400000, guid: 6a5d1db1a06751745b6af9120539864d, type: 2}
       propertyPath: item
       value: 
-      objectReference: {fileID: 100000, guid: 77499d2bac2ba0a40b245b6d2efbe4db, type: 2}
+      objectReference: {fileID: 100004, guid: 363a0e0228280224e82c728466bc51c5, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6a5d1db1a06751745b6af9120539864d, type: 2}
   m_RootGameObject: {fileID: 1416046712}

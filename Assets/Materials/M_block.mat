@@ -7,7 +7,7 @@ Material:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: M_block
-  m_Shader: {fileID: 6, guid: 0000000000000000f000000000000000, type: 0}
+  m_Shader: {fileID: 4800000, guid: 1e6a2d99aae123248a1a2b9d89f7353f, type: 3}
   m_ShaderKeywords: []
   m_CustomRenderQueue: -1
   m_SavedProperties:
@@ -25,6 +25,18 @@ Material:
         first:
           name: _Shininess
         second: .00999999978
+      data:
+        first:
+          name: _Pan
+        second: 0
+      data:
+        first:
+          name: _PanSpeed
+        second: 1
+      data:
+        first:
+          name: _Flash
+        second: 0
     m_Colors:
       data:
         first:
@@ -37,4 +49,12 @@ Material:
       data:
         first:
           name: _Emission
+        second: {r: 1, g: 1, b: 1, a: 1}
+      data:
+        first:
+          name: _Pan
+        second: {r: 1, g: 0, b: 0, a: 0}
+      data:
+        first:
+          name: _PanSpeed
         second: {r: 1, g: 1, b: 1, a: 1}

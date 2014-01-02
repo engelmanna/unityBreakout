@@ -8,5 +8,8 @@ public class KillZone : Entity {
         base.Start();
         attack = 1000;
         invincible = true;
+        renderer.material.SetColor("_Emission", Color.red);
+        renderer.material.SetColor("_Color", Color.red);
     }
+
 }

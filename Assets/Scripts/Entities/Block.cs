@@ -5,6 +5,8 @@ public class Block : Entity {
 
     Color cColor = Color.white;
     public int startHealth;
+
+    Material _material;
     public GameObject item;
     public GameObject particle;
 
@@ -12,15 +14,21 @@ public class Block : Entity {
     {
         base.Start();
 
+        _material = gameObject.renderer.material;
+
         health = startHealth;
         UpdateColor();
-        StartCoroutine("ScaleUp");
+    }
+
+    void FixedUpdate()
+    {
+        _material.SetFloat("_Pan", Time.timeSinceLevelLoad * 0.1f);
     }
 
     protected override void OnCollisionEnter2D(Collision2D coll)
     {
         base.OnCollisionEnter2D(coll);
-        
+      
         if (health <= 0 && !invincible)
         {
             if (item != null)
@@ -28,16 +36,15 @@ public class Block : Entity {
                 GameObject itm = Instantiate(item) as GameObject;
                 itm.transform.position = transform.position;
             }
-            particle.particleSystem.renderer.material = gameObject.renderer.material;
-            particle.renderer.material.SetColor("_Emission", Color.blue);
+            particle.particleSystem.renderer.material = _material;
+            _material.SetColor("_Emission", cColor);
             
             Instantiate(particle,transform.position,Quaternion.identity);
-            
             GameObject.Destroy(gameObject);
             
         }
-
         UpdateColor();
+        StartCoroutine("FlashBlock"); 
     }
 
     private void UpdateColor()
@@ -45,43 +52,36 @@ public class Block : Entity {
         switch (health)
         {
             case (5):
-                cColor = Color.red;
+                cColor = Color.magenta;
                 break;
             case (4):
-                cColor = Color.yellow;
+                cColor = Color.blue;
                 break;
             case (3):
                 cColor = Color.green;
                 break;
             case (2):
-                cColor = Color.cyan;
+                cColor = Color.yellow;
                 break;
             case (1):
-                cColor = Color.blue;
-                break;
-            case (0):
-                cColor = Color.white;
-                break;
-            default:
                 cColor = Color.red;
                 break;
+            case (0):
+                cColor = Color.red;
+                break;
+            default:
+                cColor = Color.magenta;
+                break;
         }
-        gameObject.renderer.material.SetColor("_Emission", cColor);
+        _material.SetColor("_Emission", cColor);
     }
 
-    IEnumerator ScaleUp()
+    IEnumerator FlashBlock()
     {
-        float i = 0;
-        Vector3 tempScale = Vector3.zero;
-        float test = ((transform.position.x + LevelManager.Instance.levelSize.y/2) / LevelManager.Instance.levelSize.y) * 0.05f + 0.05f;
-        Vector3 growScale = new Vector3(test,test,test);
-        while (tempScale.x < 1)
+        for (float i = 1; i >= 0; i -= 0.2f )
         {
-            transform.localScale = tempScale;
-            tempScale += growScale;
-
+            _material.SetFloat("_Flash", i);
             yield return false;
         }
-        transform.localScale = Vector3.one;
     }
 }

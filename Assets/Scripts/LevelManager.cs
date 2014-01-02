@@ -13,6 +13,23 @@ public class LevelManager : MonoBehaviour
     public Vector2 startPos;
     public Vector2 levelSize;
 
+    PowerUp currentPower;
+    public PowerUp CurrentPower
+    {
+        get { return currentPower; }
+        set
+        {
+            if (currentPower != null)
+            {
+                currentPower.Reset();
+            }
+            else
+            {
+                currentPower = value;
+            }
+        }
+    }
+
     public static LevelManager Instance
     {
         get
@@ -61,14 +78,13 @@ public class LevelManager : MonoBehaviour
         {
             Destroy(items[i]);
         }
-            ballScript.state = BallState.Dead;
 
             GameObject ballObj = Instantiate(ball,new Vector3(paddleScript.transform.position.x,paddleScript.transform.position.y+1,0),Quaternion.identity) as GameObject;
             ballScript = ballObj.GetComponent<Ball>();
             ballScript.parent = paddleScript.gameObject;
         
-        if(paddleScript.CurrentPower!=null)
-            paddleScript.CurrentPower.duration = 0;
+        if(currentPower!=null)
+            currentPower.duration = 0;
     }
 
 

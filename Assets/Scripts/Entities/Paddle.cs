@@ -7,22 +7,7 @@ public class Paddle : Entity
     float moveSpeed = 0.06f;
     float halfSize = 1.5f;
 
-    PowerUp currentPower;
-    public PowerUp CurrentPower
-    {
-        get { return currentPower; }
-        set
-        {
-            if (currentPower != null)
-            {
-                currentPower.Reset();
-            }
-            else
-            {
-                currentPower = value;
-            }
-        }
-    }
+    
 
     BoxCollider2D paddleCollider;
     Transform bnLeft;

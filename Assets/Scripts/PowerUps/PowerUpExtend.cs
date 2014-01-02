@@ -1,25 +1,24 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class PowerUp : MonoBehaviour
+public class PowerUpExtend : PowerUp
 {
 
-    public float startTime;
-    public float duration;
-
     // Use this for initialization
-    void Start()
+    protected override void Start()
     {
-        startTime = Time.time;
-        StartCoroutine("Activate");
         duration = 5;
+        powType = PowerType.EXTEND;
+        base.Start();    
     }
 
-    // Update is called once per frame
-    void Update()
+    protected override void StartPowerup()
     {
-        if (Time.time - startTime > duration)
-            StartCoroutine("Deactivate");
+        StartCoroutine("Activate");
+    }
+    protected override void EndPowerup()
+    {
+        StartCoroutine("Deactivate");
     }
 
     IEnumerator Activate(){
@@ -47,12 +46,7 @@ public class PowerUp : MonoBehaviour
             yield return true;
         }
         paddleScript.SetWidth(3);
-        paddleScript.CurrentPower = null;
+        LevelManager.Instance.CurrentPower = null;
         Destroy(this);
-    }
-
-    public void Reset()
-    {
-        startTime = Time.time;
     }
 }

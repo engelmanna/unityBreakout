@@ -53,15 +53,16 @@ public class Ball : Entity
 
     IEnumerator Die()
     {
+        renderer.enabled = false;
+        particleSystem.Play();
         state = BallState.Dead;
+        LevelManager.Instance.restartBall();
         _rigidBody2D.velocity = Vector2.zero;
-        float i = 0.0f;
-        while (i < 1)
+        while(!particleSystem.isStopped)
         {
-            i += 0.05f;
             yield return false;
         }
-        LevelManager.Instance.restartBall();
+        
         Destroy(gameObject);
 
         
@@ -96,6 +97,7 @@ public class Ball : Entity
             else
             {
                 coll.gameObject.GetComponent<KillZone>().enabled = true;
+                LevelManager.Instance.RemovePowerup(PowerType.BARRIER);
             }
         }
               

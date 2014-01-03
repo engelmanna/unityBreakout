@@ -8,7 +8,7 @@ public class PowerUpExtend : PowerUp
     protected override void Start()
     {
         duration = 5;
-        powType = PowerType.EXTEND;
+        PowType = PowerType.EXTEND;
         base.Start();    
     }
 
@@ -22,12 +22,10 @@ public class PowerUpExtend : PowerUp
     }
 
     IEnumerator Activate(){
-        float i = 0.0f;
-        while (i < 1)
+        for (float i = 0; i <= 1; i += 0.05f )
         {
             float scalar = Mathf.Lerp(1, 2, i);
             LevelManager.Instance.paddleScript.SetWidth(3 * scalar);
-            i += 0.05f;
             yield return true;
         }
         LevelManager.Instance.paddleScript.SetWidth(6);
@@ -35,12 +33,10 @@ public class PowerUpExtend : PowerUp
 
     IEnumerator Deactivate()
     {
-        float i = 0.0f;
-        while (i < 1)
+        for (float i = 0; i <= 1; i += 0.05f )
         {
             float scalar = Mathf.Lerp(2, 1, i);
             LevelManager.Instance.paddleScript.SetWidth(3 * scalar);
-            i += 0.05f;
             yield return true;
         }
         LevelManager.Instance.paddleScript.SetWidth(3);

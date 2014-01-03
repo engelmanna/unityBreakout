@@ -6,7 +6,7 @@ public class PowerUp : MonoBehaviour
 
     public float startTime;
     public float duration;
-    public PowerType powType;
+    public PowerType PowType;
 
     // Use this for initialization
     protected virtual void Start()

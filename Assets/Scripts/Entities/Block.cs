@@ -8,7 +8,6 @@ public class Block : Entity {
 
     Material _material;
     public GameObject item;
-    public GameObject particle;
 
     protected override void Start()
     {
@@ -36,12 +35,7 @@ public class Block : Entity {
                 GameObject itm = Instantiate(item) as GameObject;
                 itm.transform.position = transform.position;
             }
-            particle.particleSystem.renderer.material = _material;
-            _material.SetColor("_Emission", cColor);
-            
-            Instantiate(particle,transform.position,Quaternion.identity);
-            GameObject.Destroy(gameObject);
-            
+            StartCoroutine("Die");
         }
         UpdateColor();
         StartCoroutine("FlashBlock"); 
@@ -74,6 +68,18 @@ public class Block : Entity {
                 break;
         }
         _material.SetColor("_Emission", cColor);
+    }
+
+    IEnumerator Die()
+    {
+        renderer.enabled = false;
+        collider2D.enabled = false;
+        particleSystem.Play();
+        while (!particleSystem.isStopped)
+        {
+            yield return false;
+        }
+        GameObject.Destroy(gameObject);
     }
 
     IEnumerator FlashBlock()

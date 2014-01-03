@@ -15,7 +15,6 @@ public class LevelManager : MonoBehaviour
     public Vector2 startPos;
     public Vector2 levelSize;
 
-    PowerUp CurrentPower;
     List<PowerUp> powerupList = new List<PowerUp>();
 
     public static LevelManager Instance
@@ -81,7 +80,7 @@ public class LevelManager : MonoBehaviour
 
         foreach (PowerUp pow in powerupList)
         {
-            if (pow.powType == pt)
+            if (pow.PowType == pt)
             {
                 pow.Reset();
                 return;
@@ -91,17 +90,28 @@ public class LevelManager : MonoBehaviour
         switch (pt)
         {
             case PowerType.EXTEND:
-                CurrentPower = gameObject.AddComponent<PowerUpExtend>();
+                powerupList.Add(gameObject.AddComponent<PowerUpExtend>());
                 break;
             case PowerType.SLOW:
-                CurrentPower = gameObject.AddComponent<PowerUpSlow>();
+                powerupList.Add(gameObject.AddComponent<PowerUpSlow>());
                 break;
             case PowerType.BARRIER:
-                CurrentPower = gameObject.AddComponent<PowerUpBarrier>();
+                powerupList.Add(gameObject.AddComponent<PowerUpBarrier>());
                 break;
             default: break;
         }        
     }
 
+    public void RemovePowerup(PowerType pt)
+    {
+        foreach (PowerUp pow in powerupList)
+        {
+            if (pow.PowType == pt)
+            {
+                pow.duration = 0;
+                return;
+            }
+        }
+    }
 
 }

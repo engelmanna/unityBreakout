@@ -9,7 +9,7 @@ public class PowerUpBarrier : PowerUp
     protected override void Start()
     {
         duration = 60;
-        powType = PowerType.BARRIER;
+        PowType = PowerType.BARRIER;
         kzone = GameObject.FindGameObjectWithTag("KillZone");
         base.Start();
     }
@@ -23,7 +23,6 @@ public class PowerUpBarrier : PowerUp
 
     protected override void EndPowerup()
     {
-        Debug.Log("Ending Barrier");
         kzone.GetComponent<KillZone>().enabled = true;
         kzone.renderer.material.SetColor("_Emission", Color.red);
         kzone.renderer.material.SetColor("_Color", Color.red);

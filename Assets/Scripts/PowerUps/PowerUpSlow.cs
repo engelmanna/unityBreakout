@@ -10,7 +10,7 @@ public class PowerUpSlow : PowerUp
     protected override void Start()
     {
         duration = 3;
-        powType = PowerType.SLOW;
+        PowType = PowerType.SLOW;
         ball = GameObject.FindGameObjectWithTag("Ball");
         base.Start();
     }

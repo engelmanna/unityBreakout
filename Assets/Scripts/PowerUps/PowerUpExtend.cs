@@ -22,22 +22,22 @@ public class PowerUpExtend : PowerUp
     }
 
     IEnumerator Activate(){
-        for (float i = 0; i <= 1; i += 0.05f )
+        for (float i = 0; i <= 1; i += Time.deltaTime*4 )
         {
             float scalar = Mathf.Lerp(1, 2, i);
             LevelManager.Instance.paddleScript.SetWidth(3 * scalar);
-            yield return true;
+            yield return 0;
         }
         LevelManager.Instance.paddleScript.SetWidth(6);
     }
 
     IEnumerator Deactivate()
     {
-        for (float i = 0; i <= 1; i += 0.05f )
+        for (float i = 0; i <= 1; i += Time.deltaTime*4 )
         {
             float scalar = Mathf.Lerp(2, 1, i);
             LevelManager.Instance.paddleScript.SetWidth(3 * scalar);
-            yield return true;
+            yield return 0;
         }
         LevelManager.Instance.paddleScript.SetWidth(3);
         Destroy(this);

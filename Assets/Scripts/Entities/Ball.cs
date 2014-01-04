@@ -5,12 +5,11 @@ using System.Collections.Generic;
 public enum BallState{ Dead, Born, Alive };
 public class Ball : Entity
 {
-    [HideInInspector]
-    public BallState state;
+    BallState state;
+    Rigidbody2D _rigidBody2D;
+
     [HideInInspector]
     public GameObject parent;
-
-    Rigidbody2D _rigidBody2D;
 
     protected override void Start()
     {
@@ -21,16 +20,18 @@ public class Ball : Entity
         _rigidBody2D = gameObject.rigidbody2D;
 
         gameObject.GetComponent<TrailRenderer>().enabled = false;
-        state = BallState.Born;
         StartCoroutine("Birth");
     }
 
     public void Launch()
     {
-        state = BallState.Alive;
-        gameObject.GetComponent<TrailRenderer>().enabled = true;
-        Vector2 launchForce = new Vector2(transform.position.x * 0.1f, 1);
-        _rigidBody2D.AddForce(launchForce.normalized * 700);
+        if (state == BallState.Born)
+        {
+            state = BallState.Alive;
+            gameObject.GetComponent<TrailRenderer>().enabled = true;
+            Vector2 launchForce = new Vector2(transform.position.x * 0.1f, 1);
+            _rigidBody2D.AddForce(launchForce.normalized * 700);
+        }   
     }
 
     void FixedUpdate()
@@ -53,31 +54,34 @@ public class Ball : Entity
 
     IEnumerator Die()
     {
+        Camera.main.GetComponent<CameraController>().Shake();
+
         renderer.enabled = false;
-        particleSystem.Play();
+        gameObject.collider2D.enabled = false;
+        _rigidBody2D.Sleep();
         state = BallState.Dead;
-        LevelManager.Instance.restartBall();
-        _rigidBody2D.velocity = Vector2.zero;
+        
+        particleSystem.Play();
+
         while(!particleSystem.isStopped)
         {
-            yield return false;
+            yield return 0;
         }
         
-        Destroy(gameObject);
-
-        
+        LevelManager.Instance.restartBall();
+        Destroy(gameObject);   
     }
 
     IEnumerator Birth()
     {
-        float i = 0.0f;
-        while (i < 0.5f)
+        float i = 0;
+        while (i < 1)
         {
-            i += 0.05f;
+            i += Time.deltaTime * 3;
             transform.localScale=new Vector3(i, i, i);
-            yield return false;
+            yield return 0;
         }
-        transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
+        transform.localScale = Vector3.one;
 
 
     }
@@ -88,19 +92,8 @@ public class Ball : Entity
 
         _rigidBody2D.AddForce(_rigidBody2D.velocity.normalized * 10);
 
-        if (coll.gameObject.tag == "KillZone")
-        {
-            if (coll.gameObject.GetComponent<KillZone>().enabled)
-            {
-                StartCoroutine("Die");
-            }
-            else
-            {
-                coll.gameObject.GetComponent<KillZone>().enabled = true;
-                LevelManager.Instance.RemovePowerup(PowerType.BARRIER);
-            }
-        }
-              
+        if (health <= 0 && !invincible)
+            StartCoroutine("Die");       
     }
 
 }

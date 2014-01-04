@@ -17,14 +17,14 @@ public class Item : Entity
     {
         _transform = transform;
         rotator = _transform.Find("itemRotator");
-        _transform.Find("itemCore").renderer.materials[1].SetTextureOffset("_MainTex", new Vector2(-0.25f*(1-(int)powerType), 0));
+        _transform.Find("itemCore").renderer.material.SetTextureOffset("_MainTex", new Vector2(-0.25f*(1-(int)powerType), 0));
     }
 
     // Update is called once per frame
     void Update()
     {
         _transform.Translate(0, Time.deltaTime * -speed, 0);
-        rotator.Rotate(0, 0, 10);
+        rotator.Rotate(0, 0, Time.deltaTime * 200);
     }
 
     void OnTriggerEnter2D(Collider2D coll)

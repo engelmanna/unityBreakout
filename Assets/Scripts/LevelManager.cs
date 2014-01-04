@@ -15,6 +15,8 @@ public class LevelManager : MonoBehaviour
     public Vector2 startPos;
     public Vector2 levelSize;
 
+    public int score;
+
     List<PowerUp> powerupList = new List<PowerUp>();
 
     public static LevelManager Instance
@@ -44,13 +46,25 @@ public class LevelManager : MonoBehaviour
 
         ballScript.parent = paddleObj;
 
+        score = 0;
+
     }
 
     void Update()
     {
-        if (Input.GetKey(KeyCode.Space) && ballScript.state == BallState.Born)
-        {
+        if (Input.GetKey(KeyCode.Space))
             ballScript.Launch();
+
+        if (Input.GetKey(KeyCode.Escape))
+        {
+            if (Time.timeScale == 0)
+            {
+                Time.timeScale = 1;
+            }
+            else
+            {
+                Time.timeScale = 0;
+            }
         }
     }
     public void restartBall()

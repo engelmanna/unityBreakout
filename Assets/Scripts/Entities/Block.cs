@@ -6,22 +6,16 @@ public class Block : Entity {
     Color cColor = Color.white;
     public int startHealth;
 
-    Material _material;
     public GameObject item;
+    Mesh msh;
 
     protected override void Start()
     {
         base.Start();
 
-        _material = gameObject.renderer.material;
-
+        msh = GetComponent<MeshFilter>().mesh;
         health = startHealth;
         UpdateColor();
-    }
-
-    void FixedUpdate()
-    {
-        _material.SetFloat("_Pan", Time.timeSinceLevelLoad * 0.1f);
     }
 
     protected override void OnCollisionEnter2D(Collision2D coll)
@@ -32,11 +26,13 @@ public class Block : Entity {
         {
             if (item != null)
             {
+                LevelManager.Instance.score += 100;
                 GameObject itm = Instantiate(item) as GameObject;
                 itm.transform.position = transform.position;
             }
             StartCoroutine("Die");
         }
+        LevelManager.Instance.score += 10;
         UpdateColor();
         StartCoroutine("FlashBlock"); 
     }
@@ -67,7 +63,13 @@ public class Block : Entity {
                 cColor = Color.magenta;
                 break;
         }
-        _material.SetColor("_Emission", cColor);
+        
+        Color[] colors = new Color[msh.vertices.Length];
+        for (int i = 0; i < msh.vertices.Length;i++ )
+        {
+            colors[i] = cColor;
+        }
+        msh.colors = colors;
     }
 
     IEnumerator Die()
@@ -84,10 +86,18 @@ public class Block : Entity {
 
     IEnumerator FlashBlock()
     {
-        for (float i = 1; i >= 0; i -= 0.2f )
+        Color[] colors = new Color[msh.vertices.Length];
+        
+        for (float i = 1; i >= 0; i -= 0.02f )
         {
-            _material.SetFloat("_Flash", i);
-            yield return false;
+            Color flashAmt = new Color(i * 3, i * 3, i * 3);
+            for (int j = 0; j < msh.vertices.Length; j++)
+            {
+                colors[j] = cColor + flashAmt;
+            }
+            msh.colors = colors;
+            yield return null;
         }
+
     }
 }

@@ -16,14 +16,14 @@ public class PowerUpBarrier : PowerUp
 
     protected override void StartPowerup()
     {
-        kzone.GetComponent<KillZone>().enabled = false;
+        kzone.GetComponent<KillZone>().Attack = 0;
         kzone.renderer.material.SetColor("_Emission", Color.cyan);
         kzone.renderer.material.SetColor("_Color", Color.cyan);
     }
 
     protected override void EndPowerup()
     {
-        kzone.GetComponent<KillZone>().enabled = true;
+        kzone.GetComponent<KillZone>().Attack = 1000;
         kzone.renderer.material.SetColor("_Emission", Color.red);
         kzone.renderer.material.SetColor("_Color", Color.red);
         Destroy(this);

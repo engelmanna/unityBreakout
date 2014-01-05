@@ -9,15 +9,18 @@ public class PowerUpExtend : PowerUp
     {
         duration = 5;
         PowType = PowerType.EXTEND;
+        uiMat = GameObject.Find("ui_extend").renderer.material;
         base.Start();    
     }
 
     protected override void StartPowerup()
     {
+        uiMat.SetColor("_EmisColor", Color.white);
         StartCoroutine("Activate");
     }
     protected override void EndPowerup()
     {
+        uiMat.SetColor("_EmisColor", Color.black);
         StartCoroutine("Deactivate");
     }
 

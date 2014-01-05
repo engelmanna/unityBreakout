@@ -81,6 +81,7 @@ public class Block : Entity {
         {
             yield return false;
         }
+        LevelManager.Instance.blocks--;
         GameObject.Destroy(gameObject);
     }
 

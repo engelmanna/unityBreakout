@@ -8,6 +8,8 @@ public class PowerUp : MonoBehaviour
     public float duration;
     public PowerType PowType;
 
+    protected Material uiMat;
+
     // Use this for initialization
     protected virtual void Start()
     {

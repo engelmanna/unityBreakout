@@ -16,6 +16,7 @@ public class LevelManager : MonoBehaviour
     public Vector2 levelSize;
 
     public int score;
+    public int blocks;
 
     List<PowerUp> powerupList = new List<PowerUp>();
 
@@ -55,17 +56,12 @@ public class LevelManager : MonoBehaviour
         if (Input.GetKey(KeyCode.Space))
             ballScript.Launch();
 
-        if (Input.GetKey(KeyCode.Escape))
+        if (blocks == 0)
         {
-            if (Time.timeScale == 0)
-            {
-                Time.timeScale = 1;
-            }
-            else
-            {
-                Time.timeScale = 0;
-            }
+            Time.timeScale = 0;
+            GameObject.Find("ui_win").GetComponent<MeshRenderer>().enabled = true;
         }
+
     }
     public void restartBall()
     {
